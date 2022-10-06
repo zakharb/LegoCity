@@ -1,5 +1,5 @@
 """
-    ZLEGO
+    LEGOCITY
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,13 +15,14 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
     Description:
-        Main module for ZLEGO
+        Main module for LEGOCITY
         Controlig all processes in the city
     Author:
         Bengart Zakhar
 """
 
 from drivers.l298n import Motor
+from drivers.hcsr04 import HCSR04
 import time
 
 class RailwaySwitch():
@@ -42,8 +43,42 @@ class RailwaySwitch():
         self.motor.stop()
         time.sleep(interval)
 
+
+class Train():
+    """
+    Train control
+    """
+    def __init__(self, pin_1, pin_2):
+        self.motor = Motor(pin_1, pin_2)
+        self.running = False
+
+    def run(self):
+        self.motor.forward()
+        self.running = True
+
+    def stop(self):
+        self.motor.stop()
+        self.running = False
+        #time.sleep(interval)
+        #self.motor.stop()
+        #time.sleep(interval)
+
+    def is_running(self):
+        return self.running
+
 if __name__ == "__main__":
-    switch = RailwaySwitch(26, 27)
+    #switch = RailwaySwitch(26, 27)
+    train = Train(26, 27)
+    #while True:
+    sensor = HCSR04(trigger_pin=5, echo_pin=18, echo_timeout_us=10000)  
     while True:
-        switch.run_cycle(10)
-     
+        distance = sensor.distance_cm()
+        print('Distance:', distance, 'cm')
+        if distance < 20 and distance > 0:
+            if train.is_running() == True:
+                train.stop()
+        else:
+            if train.is_running() == False:
+                train.run()
+        time.sleep(0.5)
+

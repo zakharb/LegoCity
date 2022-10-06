@@ -28,20 +28,46 @@ class Motor():
     def __init__(self, pin_1, pin_2) :
         self.in1 = Pin(pin_1, Pin.OUT)
         self.in2 = Pin(pin_2, Pin.OUT)
-        #self.speed.freq(30000)
-        #self.speed.duty(0)
+        self.pwm1 = PWM(self.in1)
+        self.pwm2 = PWM(self.in2)
+        #self.speed.freq(20000)
+        #self.speed.duty(500)
 
     def forward(self):
-        self.in1.on()
-        self.in2.off()
+        #self.in1.on()
+        #self.in2.off()
+        print('forward')
+        self.pwm1.duty(750)
+        time.sleep(1)
+        self.pwm1.duty(800)
+        time.sleep(1)
+        self.pwm1.duty(850)
+        self.pwm2.duty(0)
 
     def backward(self):
-        self.in1.off()
-        self.in2.on()
+        #self.in1.off()
+        #self.in2.on()
+        self.pwm1.duty(0)
+        self.pwm2.duty(750)
+        time.sleep(1)
+        self.pwm2.duty(800)
+        time.sleep(1)
+        self.pwm2.duty(850)
 
     def stop(self):
-        self.in1.off()
-        self.in2.off()
+        #self.in1.off()
+        #self.in2.off()
+        self.pwm1.duty(800)
+        self.pwm2.duty(800)
+        time.sleep(0.1)
+        self.pwm1.duty(750)
+        self.pwm2.duty(750)
+        time.sleep(0.1)
+        self.pwm1.duty(700)
+        self.pwm2.duty(700)
+        time.sleep(0.1)
+        self.pwm1.duty(0)
+        self.pwm2.duty(0)
 
     def set_speed(self, value) :
         if value < 0 or value > 100:
