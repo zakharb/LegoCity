@@ -6,7 +6,7 @@
 <p align="center">
 
 <a href="https://git.io/typing-svg">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&pause=1000&color=FFCE00&center=true&width=435&lines=Build your Lego City;Micropython ESP32" alt="description" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&pause=1000&color=FFCE00&center=true&width=435&lines=Build+your+Lego+City;Micropython+ESP32" alt="description" />
 </p>
 
 <p align="center">
