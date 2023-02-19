@@ -59,22 +59,17 @@ class Train():
     def stop(self):
         self.motor.stop()
         self.running = False
-        #time.sleep(interval)
-        #self.motor.stop()
-        #time.sleep(interval)
 
     def is_running(self):
         return self.running
 
 if __name__ == "__main__":
-    #switch = RailwaySwitch(26, 27)
     train = Train(26, 27)
-    #while True:
     sensor = HCSR04(trigger_pin=5, echo_pin=18, echo_timeout_us=10000)  
     while True:
         distance = sensor.distance_cm()
         print('Distance:', distance, 'cm')
-        if distance < 20 and distance > 0:
+        if distance < 5 and distance > 0:
             if train.is_running() == True:
                 train.stop()
         else:
