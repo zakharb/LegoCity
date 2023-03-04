@@ -4,4 +4,4 @@
 
 import wlan
 interface = wlan.Wifi()
-interface.connect('lego_city', 'ushIk418~')
+interface.connect('lego_city', '')
