@@ -48,6 +48,38 @@ class Train():
     """
     Train control
     """
+    def __init__(self, pin_1, pin_2, sensor):
+        self.motor = Motor(pin_1, pin_2)
+        self.running = False
+        self.sensor = sensor
+
+    def start(self):
+        self.motor.forward()
+        self.running = True
+
+    def stop(self):
+        self.motor.stop()
+        self.running = False
+
+    def is_running(self):
+        return self.running
+    
+    def run(self):
+    while True:
+        distance = self.sensor.distance_cm()
+        #print('Distance:', distance, 'cm')
+        if distance < 5 and distance > 0:
+            if self.is_running() == True:
+                self.stop()
+        else:
+            if self.is_running() == False:
+                self.start()
+        time.sleep(0.5)
+
+class Car():
+    """
+    Car control
+    """
     def __init__(self, pin_1, pin_2):
         self.motor = Motor(pin_1, pin_2)
         self.running = False
@@ -62,18 +94,26 @@ class Train():
 
     def is_running(self):
         return self.running
+    
+    def run(self):
+    while True:
+        #distance = self.sensor.distance_cm()
+        #print('Distance:', distance, 'cm')
+        direction:
+        if self.is_running() == True:
+            self.stop()
+        else:
+            self.start()
+        time.sleep(3)
 
 if __name__ == "__main__":
-    train = Train(26, 27)
-    sensor = HCSR04(trigger_pin=5, echo_pin=18, echo_timeout_us=10000)  
-    while True:
-        distance = sensor.distance_cm()
-        print('Distance:', distance, 'cm')
-        if distance < 5 and distance > 0:
-            if train.is_running() == True:
-                train.stop()
-        else:
-            if train.is_running() == False:
-                train.run()
-        time.sleep(0.5)
+    #train = Train(26, 27)
+    car = Car(26, 14)
+    try:
+        car.run()
+    except Exception as e:
+        print(e)
+
+    #sensor = HCSR04(trigger_pin=5, echo_pin=18, echo_timeout_us=10000)  
+
 
