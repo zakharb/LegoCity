@@ -33,10 +33,19 @@ class Motor():
         #self.speed.freq(20000)
         #self.speed.duty(500)
 
+    def turn_left(self, turn_time):
+        self.pwm2.duty(0)
+        self.pwm1.duty(950)
+        time.sleep(turn_time)
+        self.pwm1.duty(0)
+
+    def turn_right(self, turn_time):
+        self.pwm1.duty(0)
+        self.pwm2.duty(950)
+        time.sleep(turn_time)
+        self.pwm2.duty(0)
+
     def forward(self):
-        #self.in1.on()
-        #self.in2.off()
-        print('forward')
         self.pwm1.duty(750)
         time.sleep(1)
         self.pwm1.duty(800)
@@ -45,8 +54,6 @@ class Motor():
         self.pwm2.duty(0)
 
     def backward(self):
-        #self.in1.off()
-        #self.in2.on()
         self.pwm1.duty(0)
         self.pwm2.duty(750)
         time.sleep(1)
@@ -55,8 +62,6 @@ class Motor():
         self.pwm2.duty(850)
 
     def stop(self):
-        #self.in1.off()
-        #self.in2.off()
         self.pwm1.duty(800)
         self.pwm2.duty(800)
         time.sleep(0.1)
