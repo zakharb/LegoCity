@@ -128,11 +128,11 @@ class Car():
             if time.time() - time_now > 10:
                 time_now = time.time()
                 if int(time_now) % 2 == 0:
-                    self.turn_left(turn_time=0.6)
-                    self.turn_right(turn_time=0.6)
+                    self.turn_left(turn_time=0.5)
+                    self.turn_right(turn_time=0.5)
                 else:
-                    self.turn_right(turn_time=0.6)
-                    self.turn_left(turn_time=0.6)
+                    self.turn_right(turn_time=0.5)
+                    self.turn_left(turn_time=0.5)
                 if int(time_now) % 8 == 0:
                     self.stop()
                     self.backward()
